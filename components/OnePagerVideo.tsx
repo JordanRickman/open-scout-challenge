@@ -1,5 +1,4 @@
 import React from 'react';
-import { Heading } from '@chakra-ui/core';
 // In production, may want to support other video sources (Vimeo, etc.)
 // For this alpha test, all video links in our example data are Youtube,
 //  so import the YouTube-only version, in order to reduce bundle size.
@@ -20,8 +19,7 @@ export const OnePagerVideo = ({
 }: OnePagerVideoProps) => {
   return (
     <ContentCard title='Pitch Video' isLoading={isLoading}>
-      {/* TODO video is rendering wider than card, fix this. */}
-      <ReactPlayer url={onePagerData.pitchVideoLink} />
+      <ReactPlayer url={onePagerData.pitchVideoLink} width="100%" />
       {/* TODO Show error message on bad video URL? */}
     </ContentCard>
   );
