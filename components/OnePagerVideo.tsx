@@ -2,7 +2,7 @@ import React from 'react';
 import { Heading } from '@chakra-ui/core';
 // In production, may want to support other video sources (Vimeo, etc.)
 // For this alpha test, all video links in our example data are Youtube,
-//  so import the YouTube libary only in order to reduce bundle size.
+//  so import the YouTube-only version, in order to reduce bundle size.
 // See: https://github.com/CookPete/react-player#usage
 import ReactPlayer from 'react-player/youtube';
 
