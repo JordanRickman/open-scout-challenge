@@ -1,5 +1,10 @@
 import React from 'react';
 import { Heading } from '@chakra-ui/core';
+// In production, may want to support other video sources (Vimeo, etc.)
+// For this alpha test, all video links in our example data are Youtube,
+//  so import the YouTube libary only in order to reduce bundle size.
+// See: https://github.com/CookPete/react-player#usage
+import ReactPlayer from 'react-player/youtube';
 
 import { OnePagerData } from '../model/model';
 import { ContentCard } from './ContentCard';
@@ -15,11 +20,9 @@ export const OnePagerVideo = ({
 }: OnePagerVideoProps) => {
   return (
     <ContentCard title='Pitch Video' isLoading={isLoading}>
-      <Heading as='h2' size='md' marginRight='10px'>
-        <a href={onePagerData.pitchVideoLink} target='_blank'>
-          Link to Pitch Video
-        </a>
-      </Heading>
+      {/* TODO video is rendering wider than card, fix this. */}
+      <ReactPlayer url={onePagerData.pitchVideoLink} />
+      {/* TODO Show error message on bad video URL? */}
     </ContentCard>
   );
 };
