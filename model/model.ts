@@ -13,8 +13,7 @@ export interface RegionalUserCount {
 
 /** Counts of users across all countries at a particular point in time. */
 export interface RegionalUsersData {
-  timestamp: Date; // TODO Use moment.js? Specify that precision is per-month?
-                   // What format we use here depends on the chart library we're using.
+  date: Date;
   regionalUserCounts: RegionalUserCount[];
 }
 
@@ -40,4 +39,5 @@ export interface OnePagerData {
   fundraisingDetails?: string;
   pitchVideoLink?: string;
   investors?: OnePagerPerson[];
+  regionalUsersData?: RegionalUsersData[];
 }

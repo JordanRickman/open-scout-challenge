@@ -7,19 +7,19 @@ import worldGeo from '../data/world-110m.json';
 
 import { RegionalUserCount } from '../model/model';
 
-type ChoroplethMapProps = {
-  minValue: number;
-  maxValue: number;
+type UsersChoroplethMapProps = {
+  minCount: number;
+  maxCount: number;
   regionalUserCounts: RegionalUserCount[];
 };
 
-export const ChoroplethMap = ({
-  minValue,
-  maxValue,
+export const UsersChoroplethMap = ({
+  minCount,
+  maxCount,
   regionalUserCounts
-}: ChoroplethMapProps) => {
+}: UsersChoroplethMapProps) => {
   const paletteScale = scaleLinear()
-              .domain([minValue, maxValue])
+              .domain([minCount, maxCount])
               .range(["#FFEFEF", 'DarkRed']); // red palette. TODO style variable.
   const defaultFill = '#EEE'; // grey
 
