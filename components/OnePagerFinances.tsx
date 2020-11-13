@@ -26,6 +26,12 @@ export const OnePagerFinances = ({
       <Heading as='h1' size='lg' marginRight='10px'>
         Funding Stage: {onePagerData.fundraisingStage}
       </Heading>
+      { onePagerData.fundraisingDetails && (
+        <>
+          <SubHeading>Stage Goal</SubHeading>
+          {onePagerData.fundraisingDetails}
+        </>
+      )}
       <SubHeading>
         Funds Raised: {formatFinanceNumber(onePagerData.fundsRaisedInStage)}
       </SubHeading>
