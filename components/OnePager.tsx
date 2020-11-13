@@ -59,10 +59,13 @@ export const OnePager = ({ onePagerUrl }: { onePagerUrl: string }) => {
         </>
       }
 
-      {/* TODO conditional render */}
-      <OnePagerUsers onePagerData={onePagerData} isLoading={isLoading} />
+      { onePagerData.regionalUsersData &&
+        <>
+          <OnePagerUsers onePagerData={onePagerData} isLoading={isLoading} />
 
-      <Diveder50 />
+          <Diveder50 />
+        </>
+      }
 
       <ContentCard isLoading={false}>
         <Flex justifyContent='center'>
