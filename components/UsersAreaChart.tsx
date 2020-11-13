@@ -1,5 +1,7 @@
 import React from 'react';
 import { Chart } from 'react-charts';
+import { Box } from '@chakra-ui/core';
+import { curveLinear } from 'd3';
 
 import { RegionalUsersData } from '../model/model';
 
@@ -23,19 +25,19 @@ export const UsersAreaChart = ({
       })
     }
   ], [usersData]);
-  console.log(chartData);
 
   const axes = React.useMemo(() => [
     { primary: true, position: 'bottom', type: 'time' },
     { position: 'left', type: 'linear' }
   ], []);
   const series = React.useMemo(() => ({
-    type: 'area'
+    type: 'area',
+    curve: curveLinear
   }), []);
 
   return (
-    <div style={{ width: "100%", height: "360px" }}>
+    <Box w="100%" h="3xs">
       <Chart data={chartData} series={series} axes={axes} tooltip />
-    </div>
+    </Box>
   )
 };
