@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heading } from '@chakra-ui/core';
+import { Heading, Progress, Box, Flex, Stat, StatLabel, StatNumber, Text } from '@chakra-ui/core';
 
 import { OnePagerData } from '../model/model';
 import { formatNumberBasic } from '../util/util';
@@ -16,11 +16,6 @@ export const OnePagerFinances = ({
   onePagerData,
   isLoading,
 }: OnePagerFinancesProps) => {
-  // Format a number to include a dollar sign, commas, and round to the nearest whole number.
-  const formatFinanceNumber = (financeNumber: number) => {
-    return `$${formatNumberBasic(financeNumber)}`;
-  };
-
   return (
     <ContentCard title='Finances' isLoading={isLoading}>
       <Heading as='h1' size='lg' marginRight='10px'>
@@ -29,15 +24,70 @@ export const OnePagerFinances = ({
       { onePagerData.fundraisingDetails && (
         <>
           <SubHeading>Stage Goal</SubHeading>
-          {onePagerData.fundraisingDetails}
+          <Text fontSize='sm'>{onePagerData.fundraisingDetails}</Text>
         </>
       )}
-      <SubHeading>
-        Funds Raised: {formatFinanceNumber(onePagerData.fundsRaisedInStage)}
-      </SubHeading>
-      <SubHeading>
-        Funding Goal: {formatFinanceNumber(onePagerData.fundraisingStageGoal)}
-      </SubHeading>
+      <FundraisingProgress
+        raised={onePagerData.fundsRaisedInStage}
+        goal={onePagerData.fundraisingStageGoal}
+      />
     </ContentCard>
   );
 };
+
+/** Render a fundraising progress component. */
+const FundraisingProgress = ({ raised, goal }): {
+  raised: number;
+  goal: number;
+} => {
+  // Format a number to include a dollar sign, commas, and round to the nearest whole number.
+  const formatFinanceNumber = (financeNumber: number) => {
+    return `$${formatNumberBasic(financeNumber)}`;
+  };
+
+  const progress = 100 * raised / goal;
+
+  return (
+    <Box margin='1em 0'>
+      <Flex
+        flexDirection='row'
+        justifyContent='space-between'
+        alignItems='baseline'
+        marginBottom='2px'
+      >
+        <Stat flex='0 1 auto' p='4px'>
+          <StatLabel fontSize='sm' margin='0'>Funds Raised</StatLabel>
+          <StatNumber fontSize='lg' marginTop='0' marginBottom='5px'>
+            {formatFinanceNumber(raised)}
+          </StatNumber>
+        </Stat>
+        <Text
+          alignSelf='center'
+          fontSize='xs'
+          color='grey'
+        >
+          out of
+        </Text>
+        <Stat flex='0 1 auto' p='4px'>
+          <StatLabel fontSize='sm' margin='0'>Funding Goal</StatLabel>
+          <StatNumber fontSize='lg' marginTop='0' marginBottom='5px'>
+            {formatFinanceNumber(goal)}
+          </StatNumber>
+        </Stat>
+      </Flex>
+      <Box
+        border='1px solid grey'
+        rounded='lg'
+        margin='0'
+        bg='white'
+        postion='relative'
+      >
+        <Progress value={progress}
+          colorScheme='green'
+          margin='1em'
+          size='lg'
+        />
+      </Box>
+    </Box>
+  );
+}
