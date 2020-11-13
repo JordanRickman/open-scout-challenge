@@ -1,6 +1,7 @@
 import { OnePagerData, OnePagerPublicData } from '../model/model';
 import * as founders from './founders';
 import * as investors from './investors';
+import * as regionalUsersData from './regionalUsersData';
 
 /** An empty one pager, for initial React state */
 export const EMPTY_ONE_PAGER: OnePagerData = {
@@ -26,79 +27,7 @@ const facebook: OnePagerData = {
   founders: [founders.facebook1, founders.facebook2, founders.facebook3],
   pitchVideoLink: 'https://www.youtube.com/watch?v=WzgNAN3dW-I',
   investors: [investors.investor2],
-  regionalUsersData: [
-    {
-      date: new Date(2020, 1),
-      regionalUserCounts: [
-        {
-          countryCode: 'IND',
-          userCount: 310000000
-        },
-        {
-          countryCode: 'USA',
-          userCount: 190000000
-        },
-        {
-          countryCode: 'BRA',
-          userCount: 130000000
-        },
-        {
-          countryCode: 'IDN',
-          userCount: 140000000
-        },
-        {
-          countryCode: 'MEX',
-          userCount: 92000000
-        }
-      ]
-    },
-    {
-      date: new Date(2019, 8),
-      regionalUserCounts: [
-        {
-          countryCode: 'IND',
-          userCount: 251000000
-        },
-        {
-          countryCode: 'USA',
-          userCount: 240000000
-        },
-        {
-          countryCode: 'BRA',
-          userCount: 139000000
-        },
-        {
-          countryCode: 'IDN',
-          userCount: 136960000
-        },
-        {
-          countryCode: 'MEX',
-          userCount: 78000000
-        }
-      ]
-    },
-    {
-      date: new Date(2019, 1),
-      regionalUserCounts: [
-        {
-          countryCode: 'IND',
-          userCount: 25000000
-        },
-        {
-          countryCode: 'USA',
-          userCount: 24000000
-        },
-        {
-          countryCode: 'BRA',
-          userCount: 13900000
-        },
-        {
-          countryCode: 'MEX',
-          userCount: 7800000
-        }
-      ]
-    }
-  ]
+  regionalUsersData: regionalUsersData.facebook
 };
 
 const lendingClub: OnePagerData = {
