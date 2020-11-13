@@ -47,6 +47,24 @@ const FundraisingProgress = ({ raised, goal }): {
 
   const progress = 100 * raised / goal;
 
+  // Common rendering code for the "funds raised" and the "funding goal".
+  const StatFunding = ({
+    label,
+    value
+  }): {
+    label: string,
+    value: number
+  } => {
+    return (
+      <Stat flex='0 1 auto' p='4px'>
+        <StatLabel fontSize='sm' margin='0'>{label}</StatLabel>
+        <StatNumber fontSize='lg' marginTop='0' marginBottom='5px'>
+          {formatFinanceNumber(value)}
+        </StatNumber>
+      </Stat>
+    )
+  }
+
   return (
     <Box margin='1em 0'>
       <Flex
@@ -55,12 +73,7 @@ const FundraisingProgress = ({ raised, goal }): {
         alignItems='baseline'
         marginBottom='2px'
       >
-        <Stat flex='0 1 auto' p='4px'>
-          <StatLabel fontSize='sm' margin='0'>Funds Raised</StatLabel>
-          <StatNumber fontSize='lg' marginTop='0' marginBottom='5px'>
-            {formatFinanceNumber(raised)}
-          </StatNumber>
-        </Stat>
+        <StatFunding label='Funds Raised' value={raised} />
         <Text
           alignSelf='center'
           fontSize='xs'
@@ -68,12 +81,7 @@ const FundraisingProgress = ({ raised, goal }): {
         >
           out of
         </Text>
-        <Stat flex='0 1 auto' p='4px'>
-          <StatLabel fontSize='sm' margin='0'>Funding Goal</StatLabel>
-          <StatNumber fontSize='lg' marginTop='0' marginBottom='5px'>
-            {formatFinanceNumber(goal)}
-          </StatNumber>
-        </Stat>
+        <StatFunding label='Funding Goal' value={goal} />
       </Flex>
       <Box
         border='1px solid grey'
