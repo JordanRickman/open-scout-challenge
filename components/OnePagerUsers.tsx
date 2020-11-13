@@ -38,6 +38,15 @@ export const OnePagerUsers = ({
   const minRegionalUserCount = reduceUserCounts(Math.min, Infinity);
   const maxRegionalUserCount = reduceUserCounts(Math.max, 0);
 
+  /* TODO My intended design for this component was that the user could click
+   *  on a datapoint in the area chart of users over time, and the world map
+   *  would change to show regional user data at that particular point in time.
+   *  (Or, the map would just change as you hover over data points.)
+   * However, it was taking too long figuring out how to hook into the
+   *  react-charts library to do that.
+   * So, add this feature later if time. Otherwise, map just shows current/latest
+   *  regional user data.
+   */
   const latestUsersData = onePagerData.regionalUsersData.reduce(
     (usersData1, usersData2) => {
       if (usersData1.date >= usersData2.date) {
