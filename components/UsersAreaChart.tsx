@@ -35,9 +35,16 @@ export const UsersAreaChart = ({
     curve: curveLinear
   }), []);
 
+  const getSeriesStyle = React.useCallback(
+    series => ({
+      color: 'rgb(185, 95, 95)'
+    }),
+    []
+  );
+
   return (
     <Box w="100%" h="3xs">
-      <Chart data={chartData} series={series} axes={axes} tooltip />
+      <Chart data={chartData} series={series} axes={axes} tooltip getSeriesStyle={getSeriesStyle} />
     </Box>
   )
 };
