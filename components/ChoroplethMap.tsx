@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactTooltip from 'react-tooltip';
 import { scaleLinear } from 'd3-scale';
 import { ComposableMap, Geographies, Geography, Graticule } from 'react-simple-maps';
 import { geoEquirectangular } from 'd3';
@@ -35,27 +36,44 @@ export const ChoroplethMap = ({
     };
   });
 
+  const [tooltip, setTooltip] = React.useState('');
+
   return (
-    <ComposableMap projection={geoEquirectangular().scale(130)}
-      viewBox="74 52 800 334"
-      style={{ border: "1px solid black" }}
-    >
-      <Graticule stroke="#E0E0E0" />
-      <Geographies geography={worldGeo}>
-        {({ geographies }) =>
-          geographies.map((geo) => {
-            const data = dataset[geo.properties.ISO_A3]
-            return (
-              <Geography
-                key={geo.rsmKey}
-                geography={geo}
-                fill={data ? data.fillColor : defaultFill}
-                stroke="black"
-              />
-            );
-          })
-        }
-      </Geographies>
-    </ComposableMap>
+    <>
+      <ReactTooltip>{tooltip}</ReactTooltip>
+      <ComposableMap projection={geoEquirectangular().scale(130)}
+        viewBox="74 52 800 334"
+        style={{ border: "1px solid black" }}
+        data-tip=""
+      >
+        <Graticule stroke="#E0E0E0" />
+        <Geographies geography={worldGeo}>
+          {({ geographies }) =>
+            geographies.map((geo) => {
+              const data = dataset[geo.properties.ISO_A3]
+              return (
+                <Geography
+                  key={geo.rsmKey}
+                  geography={geo}
+                  fill={data ? data.fillColor : defaultFill}
+                  stroke="black"
+                  onMouseEnter={() => {
+                    if (data) {
+                      const countryName = geo.properties.NAME;
+                      setTooltip(<>
+                        {countryName}: <strong>{data.userCount}</strong> Users
+                      </>)
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    setTooltip('');
+                  }}
+                />
+              );
+            })
+          }
+        </Geographies>
+      </ComposableMap>
+    </>
   )
 };
