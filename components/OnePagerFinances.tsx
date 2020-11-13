@@ -2,6 +2,7 @@ import React from 'react';
 import { Heading } from '@chakra-ui/core';
 
 import { OnePagerData } from '../model/model';
+import { formatNumberBasic } from '../util/util';
 import { ContentCard } from './ContentCard';
 import { SubHeading } from './SubHeading';
 
@@ -15,10 +16,9 @@ export const OnePagerFinances = ({
   onePagerData,
   isLoading,
 }: OnePagerFinancesProps) => {
-  // Format a number to include a dollar sign. This function
-  // will be improved as part of task 2.
+  // Format a number to include a dollar sign, commas, and round to the nearest whole number.
   const formatFinanceNumber = (financeNumber: number) => {
-    return `$${financeNumber}`;
+    return `$${formatNumberBasic(financeNumber)}`;
   };
 
   return (
