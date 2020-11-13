@@ -6,6 +6,7 @@ import { geoEquirectangular } from 'd3';
 import worldGeo from '../data/world-110m.json';
 
 import { RegionalUserCount } from '../model/model';
+import { formatUserNumber } from '../util/util';
 
 type UsersChoroplethMapProps = {
   minCount: number;
@@ -61,7 +62,7 @@ export const UsersChoroplethMap = ({
                     if (data) {
                       const countryName = geo.properties.NAME;
                       setTooltip(<>
-                        {countryName}: <strong>{data.userCount}</strong> Users
+                        {countryName}: <strong>{formatUserNumber(data.userCount)}</strong> Users
                       </>)
                     }
                   }}

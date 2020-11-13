@@ -6,7 +6,7 @@ export const facebook: RegionalUsersData[] = [
     regionalUserCounts: [
       {
         countryCode: 'IND',
-        userCount: 310000000
+        userCount: 310200000
       },
       {
         countryCode: 'USA',
@@ -22,7 +22,7 @@ export const facebook: RegionalUsersData[] = [
       },
       {
         countryCode: 'MEX',
-        userCount: 92000000
+        userCount: 92860000
       }
     ]
   },

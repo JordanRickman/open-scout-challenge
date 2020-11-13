@@ -12,6 +12,7 @@ export interface RegionalUserCount {
 }
 
 /** Counts of users across all countries at a particular point in time. */
+// TODO Rename type and properties to just 'UsersData'?
 export interface RegionalUsersData {
   date: Date;
   regionalUserCounts: RegionalUserCount[];
