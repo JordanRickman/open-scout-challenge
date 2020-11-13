@@ -1,6 +1,6 @@
 import React from 'react';
 import { scaleLinear } from 'd3-scale';
-import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
+import { ComposableMap, Geographies, Geography, Graticule } from 'react-simple-maps';
 import { geoEquirectangular } from 'd3';
 import worldGeo from '../data/world-110m.json';
 
@@ -40,6 +40,7 @@ export const ChoroplethMap = ({
       viewBox="74 52 800 334"
       style={{ border: "1px solid black" }}
     >
+      <Graticule stroke="#E0E0E0" />
       <Geographies geography={worldGeo}>
         {({ geographies }) =>
           geographies.map((geo) => {
