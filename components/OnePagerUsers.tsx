@@ -1,11 +1,13 @@
 import React from 'react';
+import { Heading } from '@chakra-ui/core';
 
 import { OnePagerData } from '../model/model';
 import { ContentCard } from './ContentCard';
+import { SubHeading } from './SubHeading';
 import { UsersChoroplethMap } from './UsersChoroplethMap';
 import { UsersAreaChart } from './UsersAreaChart';
 
-// TODO consolidate type across all content cards??
+// TODO consolidate type across all content cards?
 type OnePagerUsersProps = {
   onePagerData: OnePagerData;
   isLoading: boolean;
@@ -36,9 +38,7 @@ export const OnePagerUsers = ({
   const minRegionalUserCount = reduceUserCounts(Math.min, Infinity);
   const maxRegionalUserCount = reduceUserCounts(Math.max, 0);
 
-  // TODO Dynamic.
-  const selectedUsersData = onePagerData.regionalUsersData.reduce(
-    // Initialize map with most recent data.
+  const latestUsersData = onePagerData.regionalUsersData.reduce(
     (usersData1, usersData2) => {
       if (usersData1.date >= usersData2.date) {
         return usersData1;
@@ -47,15 +47,31 @@ export const OnePagerUsers = ({
       }
     }
   );
+  const totalCurrentUsers = latestUsersData.regionalUserCounts
+      .reduce((a, b) => (a + b.userCount), 0);
 
   return (
     <ContentCard title='Users' isLoading={isLoading}>
+      <Heading as='h1' size='lg' marginRight='10px'>
+        Worldwide Userbase: {formatUserNumber(totalCurrentUsers)}
+      </Heading>
+      <SubHeading marginTop='30px'>
+        Worldwide Adoption Over Time
+      </SubHeading>
+      <UsersAreaChart usersData={onePagerData.regionalUsersData}/>
+      <SubHeading marginTop='30px'>
+        Userbase by Country
+      </SubHeading>
       <UsersChoroplethMap
         minCount={minRegionalUserCount}
         maxCount={maxRegionalUserCount}
-        regionalUserCounts={selectedUsersData.regionalUserCounts}
+        regionalUserCounts={latestUsersData.regionalUserCounts}
         />
-      <UsersAreaChart usersData={onePagerData.regionalUsersData}/>
     </ContentCard>
   );
 };
+
+function formatUserNumber(number) {
+  // TODO
+  return String(number);
+}

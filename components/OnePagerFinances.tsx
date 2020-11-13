@@ -3,6 +3,7 @@ import { Heading } from '@chakra-ui/core';
 
 import { OnePagerData } from '../model/model';
 import { ContentCard } from './ContentCard';
+import { SubHeading } from './SubHeading';
 
 type OnePagerFinancesProps = {
   onePagerData: OnePagerData;
@@ -34,10 +35,3 @@ export const OnePagerFinances = ({
     </ContentCard>
   );
 };
-
-/** Renders smaller heading. */
-const SubHeading = ({ children }) => (
-  <Heading as='h2' size='md' marginRight='10px'>
-    {children}
-  </Heading>
-);
