@@ -37,7 +37,7 @@ export const UsersChoroplethMap = ({
     };
   });
 
-  const [tooltip, setTooltip] = React.useState('');
+  const [tooltip, setTooltip] = React.useState({});
 
   return (
     <>

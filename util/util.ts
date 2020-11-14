@@ -18,5 +18,5 @@ export const formatUserNumber = (n: number) => {
   } if (n > 10 ** 6) {
     return `${roundToDecimalPlaces(n / 10**6, 1)} Million`;
   }
-  return formatNumberWithCommas(n);
+  return formatNumberBasic(n);
 };
