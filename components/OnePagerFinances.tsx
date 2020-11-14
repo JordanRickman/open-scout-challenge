@@ -88,7 +88,6 @@ const FundraisingProgress = ({ raised, goal }: {
         rounded='lg'
         margin='0'
         bg='white'
-        postion='relative'
       >
         <Progress value={progress}
           colorScheme='green'
