@@ -21,7 +21,6 @@ export const usePaywall = (onePagerUrl: string): {
       sameSite: true
     });
     return !user.allowed;
-    // return true; // DEBUG
   }
 
   useEffect(() => {
