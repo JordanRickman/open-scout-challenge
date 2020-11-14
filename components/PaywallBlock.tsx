@@ -4,7 +4,9 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalBody
+  ModalBody,
+  ModalFooter,
+  Button
  } from '@chakra-ui/core';
 
 type PaywallBlockProps = {
@@ -13,7 +15,8 @@ type PaywallBlockProps = {
 
 /** Render a modal dialog to block content behind a paywall. */
 export const PaywallBlock = ({
-  isBlocked = false
+  isBlocked = false,
+  paidHandler
 }: PaywallBlockProps) => {
   return (
     <Modal isOpen={isBlocked} size='xl' isCentered
@@ -25,6 +28,9 @@ export const PaywallBlock = ({
           You have reached your limit as a free user.
           Please submit payment in order to view more OnePagers.
         </ModalBody>
+        <ModalFooter>
+          <Button onClick={paidHandler}>Accept Payment</Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   )

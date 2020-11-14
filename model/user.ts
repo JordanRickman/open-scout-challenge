@@ -1,5 +1,5 @@
 /** User information visible on the browser side. */
-type UserClientData = {
+export interface UserClientData {
   userId: string;
   allowed: boolean;
 };

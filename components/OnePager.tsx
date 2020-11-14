@@ -22,11 +22,11 @@ export const OnePager = ({ onePagerUrl }: { onePagerUrl: string }) => {
     EMPTY_ONE_PAGER
   );
   const [isLoading, setIsLoading]: [boolean, any] = React.useState(false);
-  const isBlockedByPaywall: boolean = usePaywall(onePagerUrl);
+  const {isBlocked, markPaid} : {isBlocked: boolean; markPaid: any} = usePaywall(onePagerUrl);
 
   // If paywall is up, render as if still loading. Then, if the user force closes
   //  the paywall modal via dev tools or the like, they still can't see the content.
-  const showLoading = isLoading || isBlockedByPaywall;
+  const showLoading = isLoading || isBlocked;
 
   // Load data on first render.
   React.useEffect(() => {
@@ -39,7 +39,7 @@ export const OnePager = ({ onePagerUrl }: { onePagerUrl: string }) => {
 
   return (
     <Box bg='#f2f4f5'>
-      <PaywallBlock isBlocked={isBlockedByPaywall} />
+      <PaywallBlock isBlocked={isBlocked} paidHandler={markPaid} />
       <Head>
         <title>{showLoading ? onePagerUrl : onePagerData.companyName}</title>
         <link rel='icon' href='/favicon.png' />
