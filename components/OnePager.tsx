@@ -6,7 +6,7 @@ import { Box, Flex, Divider } from '@chakra-ui/core';
 import { OnePagerData } from '../model/model';
 import { getOnePagerData } from '../data/dataService';
 import { EMPTY_ONE_PAGER } from '../data/onepagers';
-import { checkPaywall } from '../lib/checkPaywall';
+import { usePaywall } from '../lib/usePaywall';
 import { ContentCard } from './ContentCard';
 import { Header } from './Header';
 import { OnePagerOverview } from './OnePagerOverview';
@@ -22,51 +22,46 @@ export const OnePager = ({ onePagerUrl }: { onePagerUrl: string }) => {
     EMPTY_ONE_PAGER
   );
   const [isLoading, setIsLoading]: [boolean, any] = React.useState(false);
-  const [isBlocked, setIsBlocked]: [boolean, any] = React.useState(false);
+  const isBlockedByPaywall: boolean = usePaywall(onePagerUrl);
+
+  // If paywall is up, render as if still loading. Then, if the user force closes
+  //  the paywall modal via dev tools or the like, they still can't see the content.
+  const showLoading = isLoading || isBlockedByPaywall;
 
   // Load data on first render.
   React.useEffect(() => {
     setIsLoading(true);
-    Promise.all([
-      getOnePagerData(onePagerUrl),
-      checkPaywall(onePagerUrl)
-    ]).then(([onePagerData, paywallCheck]) => {
+    getOnePagerData(onePagerUrl).then((onePagerData) => {
       setOnePager(onePagerData);
-      if (paywallCheck) {
-        setIsBlocked(true);
-      } else {
-        // If paywall is up, keep isLoading true. Then, if the user force closes
-        //  the modal via dev tools or the like, they still can't see the content.
-        setIsLoading(false);
-      }
-    })
+      setIsLoading(false);
+    });
   }, []);
 
   return (
     <Box bg='#f2f4f5'>
-      <PaywallBlock isBlocked={isBlocked} />
+      <PaywallBlock isBlocked={isBlockedByPaywall} />
       <Head>
-        <title>{isLoading ? onePagerUrl : onePagerData.companyName}</title>
+        <title>{showLoading ? onePagerUrl : onePagerData.companyName}</title>
         <link rel='icon' href='/favicon.png' />
       </Head>
 
       <Header />
 
-      <OnePagerOverview onePagerData={onePagerData} isLoading={isLoading} />
+      <OnePagerOverview onePagerData={onePagerData} isLoading={showLoading} />
 
       <Diveder50 />
 
-      <OnePagerFounders onePagerData={onePagerData} isLoading={isLoading} />
+      <OnePagerFounders onePagerData={onePagerData} isLoading={showLoading} />
 
       <Diveder50 />
 
-      <OnePagerFinances onePagerData={onePagerData} isLoading={isLoading} />
+      <OnePagerFinances onePagerData={onePagerData} isLoading={showLoading} />
 
       <Diveder50 />
 
       { onePagerData.pitchVideoLink &&
         <>
-          <OnePagerVideo onePagerData={onePagerData} isLoading={isLoading} />
+          <OnePagerVideo onePagerData={onePagerData} isLoading={showLoading} />
 
           <Diveder50 />
         </>
