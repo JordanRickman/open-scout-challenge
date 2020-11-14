@@ -13,6 +13,7 @@ import { OnePagerFounders } from './OnePagerFounders';
 import { OnePagerFinances } from './OnePagerFinances';
 import { OnePagerVideo } from './OnePagerVideo';
 import { OnePagerUsers } from './OnePagerUsers';
+import { PaywallBlock } from './PaywallBlock';
 
 /** Renders a full one pager based on the onePagerUrl. */
 export const OnePager = ({ onePagerUrl }: { onePagerUrl: string }) => {
@@ -32,6 +33,7 @@ export const OnePager = ({ onePagerUrl }: { onePagerUrl: string }) => {
 
   return (
     <Box bg='#f2f4f5'>
+      <PaywallBlock isBlocked={true} />
       <Head>
         <title>{isLoading ? onePagerUrl : onePagerData.companyName}</title>
         <link rel='icon' href='/favicon.png' />
