@@ -11,6 +11,7 @@ import {
 
 type PaywallBlockProps = {
   isBlocked: boolean;
+  paidHandler: any;
 };
 
 /** Render a modal dialog to block content behind a paywall. */
