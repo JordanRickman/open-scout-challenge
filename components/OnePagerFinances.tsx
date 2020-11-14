@@ -2,7 +2,7 @@ import React from 'react';
 import { Heading, Progress, Box, Flex, Stat, StatLabel, StatNumber, Text } from '@chakra-ui/core';
 
 import { OnePagerData } from '../model/model';
-import { formatNumberBasic } from '../util/util';
+import { formatNumberBasic } from '../lib/util';
 import { ContentCard } from './ContentCard';
 import { Keypoint } from './Keypoint';
 

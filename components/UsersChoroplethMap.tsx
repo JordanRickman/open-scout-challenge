@@ -6,7 +6,7 @@ import { geoEquirectangular } from 'd3';
 import worldGeo from '../data/world-110m.json';
 
 import { RegionalUserCount } from '../model/model';
-import { formatUserNumber } from '../util/util';
+import { formatUserNumber } from '../lib/util';
 
 type UsersChoroplethMapProps = {
   minCount: number;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Heading } from '@chakra-ui/core';
 
 import { OnePagerData } from '../model/model';
-import { formatUserNumber } from '../util/util';
+import { formatUserNumber } from '../lib/util';
 import { ContentCard } from './ContentCard';
 import { SubHeading } from './SubHeading';
 import { Keypoint } from './Keypoint';
