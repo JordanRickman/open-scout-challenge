@@ -51,10 +51,10 @@ const FundraisingProgress = ({ raised, goal }: {
   const StatFunding = ({
     label,
     value
-  }): {
+  }: {
     label: string,
     value: number
-  } => {
+  }) => {
     return (
       <Stat flex='0 1 auto' p='4px'>
         <StatLabel fontSize='sm' margin='0'>{label}</StatLabel>
