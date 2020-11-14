@@ -4,7 +4,7 @@ import { Heading, Progress, Box, Flex, Stat, StatLabel, StatNumber, Text } from 
 import { OnePagerData } from '../model/model';
 import { formatNumberBasic } from '../util/util';
 import { ContentCard } from './ContentCard';
-import { SubHeading } from './SubHeading';
+import { Keypoint } from './Keypoint';
 
 type OnePagerFinancesProps = {
   onePagerData: OnePagerData;
@@ -19,13 +19,13 @@ export const OnePagerFinances = ({
   return (
     <ContentCard title='Finances' isLoading={isLoading}>
       <Heading as='h1' size='lg' marginRight='10px'>
-        Funding Stage: {onePagerData.fundraisingStage}
+        Funding Stage: <Keypoint>{onePagerData.fundraisingStage}</Keypoint>
       </Heading>
       { onePagerData.fundraisingDetails && (
-        <>
-          <SubHeading>Stage Goal</SubHeading>
-          <Text fontSize='sm'>{onePagerData.fundraisingDetails}</Text>
-        </>
+        <Text fontSize='sm'>
+          <Keypoint color='black' marginLeft='0'>Stage Goal:&nbsp;</Keypoint>
+          {onePagerData.fundraisingDetails}
+        </Text>
       )}
       <FundraisingProgress
         raised={onePagerData.fundsRaisedInStage}
@@ -59,7 +59,7 @@ const FundraisingProgress = ({ raised, goal }: {
       <Stat flex='0 1 auto' p='4px'>
         <StatLabel fontSize='sm' margin='0'>{label}</StatLabel>
         <StatNumber fontSize='lg' marginTop='0' marginBottom='5px'>
-          {formatFinanceNumber(value)}
+          <Keypoint>{formatFinanceNumber(value)}</Keypoint>
         </StatNumber>
       </Stat>
     )

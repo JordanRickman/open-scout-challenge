@@ -5,6 +5,7 @@ import { OnePagerData } from '../model/model';
 import { formatUserNumber } from '../util/util';
 import { ContentCard } from './ContentCard';
 import { SubHeading } from './SubHeading';
+import { Keypoint } from './Keypoint';
 import { UsersChoroplethMap } from './UsersChoroplethMap';
 import { UsersAreaChart } from './UsersAreaChart';
 
@@ -63,7 +64,7 @@ export const OnePagerUsers = ({
   return (
     <ContentCard title='Users' isLoading={isLoading}>
       <Heading as='h1' size='lg' marginRight='10px'>
-        Worldwide Userbase: {formatUserNumber(totalCurrentUsers)}
+        Worldwide Userbase: <Keypoint>{formatUserNumber(totalCurrentUsers)}</Keypoint>
       </Heading>
       <SubHeading marginTop='30px'>
         Worldwide Adoption Over Time
