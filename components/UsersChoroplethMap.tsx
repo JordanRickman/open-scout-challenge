@@ -37,7 +37,7 @@ export const UsersChoroplethMap = ({
     };
   });
 
-  const [tooltip, setTooltip] = React.useState({});
+  const [tooltip, setTooltip] = React.useState<React.ReactNode | null>(null);
 
   return (
     <>
@@ -67,7 +67,7 @@ export const UsersChoroplethMap = ({
                     }
                   }}
                   onMouseLeave={() => {
-                    setTooltip('');
+                    setTooltip(null);
                   }}
                 />
               );
