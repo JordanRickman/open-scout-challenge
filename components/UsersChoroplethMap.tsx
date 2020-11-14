@@ -21,7 +21,7 @@ export const UsersChoroplethMap = ({
 }: UsersChoroplethMapProps) => {
   const paletteScale = scaleLinear()
               .domain([minCount, maxCount])
-              .range(["#FFEFEF", 'DarkRed']); // red palette. TODO style variable.
+              .range(["#FFEFEF", 'DarkRed']); // red palette.
   const defaultFill = '#EEE'; // grey
 
   const dataset: {

@@ -9,7 +9,6 @@ import { Keypoint } from './Keypoint';
 import { UsersChoroplethMap } from './UsersChoroplethMap';
 import { UsersAreaChart } from './UsersAreaChart';
 
-// TODO consolidate type across all content cards?
 type OnePagerUsersProps = {
   onePagerData: OnePagerData;
   isLoading: boolean;
@@ -27,7 +26,6 @@ export const OnePagerUsers = ({
   }
 
   function reduceUserCounts(reducerFunction, initialValue) {
-    // TODO use lodash instead?
     return onePagerData.regionalUsersData.reduce((acc, nextData) => {
       return reducerFunction(acc, nextData.regionalUserCounts.reduce(
         (acc, nextRegion) => {

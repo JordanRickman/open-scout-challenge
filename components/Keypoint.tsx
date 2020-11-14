@@ -17,7 +17,6 @@ export const Keypoint = ({
   ...props
 }) => {
     return (
-      // TODO global style variable for color?
       <Text
         as='strong'
         d='inline-block'
