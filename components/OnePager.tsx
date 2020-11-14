@@ -6,6 +6,7 @@ import { Box, Flex, Divider } from '@chakra-ui/core';
 import { OnePagerData } from '../model/model';
 import { getOnePagerData } from '../data/dataService';
 import { EMPTY_ONE_PAGER } from '../data/onepagers';
+import { checkPaywall } from '../lib/checkPaywall';
 import { ContentCard } from './ContentCard';
 import { Header } from './Header';
 import { OnePagerOverview } from './OnePagerOverview';
@@ -21,19 +22,29 @@ export const OnePager = ({ onePagerUrl }: { onePagerUrl: string }) => {
     EMPTY_ONE_PAGER
   );
   const [isLoading, setIsLoading]: [boolean, any] = React.useState(false);
+  const [isBlocked, setIsBlocked]: [boolean, any] = React.useState(false);
 
   // Load data on first render.
   React.useEffect(() => {
     setIsLoading(true);
-    getOnePagerData(onePagerUrl).then((result) => {
-      setOnePager(result);
-      setIsLoading(false);
-    });
+    Promise.all([
+      getOnePagerData(onePagerUrl),
+      checkPaywall(onePagerUrl)
+    ]).then(([onePagerData, paywallCheck]) => {
+      setOnePager(onePagerData);
+      if (paywallCheck) {
+        setIsBlocked(true);
+      } else {
+        // If paywall is up, keep isLoading true. Then, if the user force closes
+        //  the modal via dev tools or the like, they still can't see the content.
+        setIsLoading(false);
+      }
+    })
   }, []);
 
   return (
     <Box bg='#f2f4f5'>
-      <PaywallBlock isBlocked={true} />
+      <PaywallBlock isBlocked={isBlocked} />
       <Head>
         <title>{isLoading ? onePagerUrl : onePagerData.companyName}</title>
         <link rel='icon' href='/favicon.png' />
