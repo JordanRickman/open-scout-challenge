@@ -36,10 +36,10 @@ export const OnePagerFinances = ({
 };
 
 /** Render a fundraising progress component. */
-const FundraisingProgress = ({ raised, goal }): {
+const FundraisingProgress = ({ raised, goal }: {
   raised: number;
   goal: number;
-} => {
+}) => {
   // Format a number to include a dollar sign, commas, and round to the nearest whole number.
   const formatFinanceNumber = (financeNumber: number) => {
     return `$${formatNumberBasic(financeNumber)}`;
@@ -98,4 +98,4 @@ const FundraisingProgress = ({ raised, goal }): {
       </Box>
     </Box>
   );
-}
+};
